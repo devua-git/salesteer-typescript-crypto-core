@@ -20,17 +20,19 @@
     }
   },
   "scripts": {
-    "build": "pnpm typecheck && pnpm clean && tsup",
+    "build": "tsc --noEmit && pnpm clean && tsup",
     "clean": "node --eval \"import('node:fs').then(({ rmSync }) => rmSync('dist', { recursive: true, force: true }))\"",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit",
-    "verify": "pnpm typecheck && pnpm test && pnpm build",
+    "prerelease": "pnpm lint:fix && pnpm format && pnpm build && pnpm test:coverage",
     "format": "dprint fmt",
     "lint": "DEBUG=eslint:eslint* TIMING=1 eslint . --cache --concurrency=auto",
     "lint:fix": "DEBUG=eslint:eslint* TIMING=1 eslint . --fix --cache --quiet --concurrency=auto",
-    "prepare": "pnpm build"
+    "prepare": "pnpm build",
+    "release:patch": "pnpm prerelease && pnpm version patch && git push --follow-tags",
+    "release:minor": "pnpm prerelease && pnpm version minor && git push --follow-tags",
+    "release:major": "pnpm prerelease && pnpm version major && git push --follow-tags"
   },
   "publishConfig": {
     "access": "public"
