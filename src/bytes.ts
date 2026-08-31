@@ -13,7 +13,7 @@ export function toUint8Array(input: Uint8Array<ArrayBuffer> | ArrayBufferInput |
 }
 
 export function toArrayBuffer(input: ArrayBufferInput): ArrayBuffer {
-  return toUint8Array(input).buffer as ArrayBuffer
+  return toUint8Array(input).buffer
 }
 
 export const concatBuffers = (...inputs: readonly ArrayBufferInput[]): Uint8Array<ArrayBuffer> => {
