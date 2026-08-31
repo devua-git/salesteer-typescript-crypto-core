@@ -15,13 +15,12 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "development": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     }
   },
   "scripts": {
-    "build": "pnpm typecheck && tsup",
+    "build": "pnpm typecheck && pnpm clean && tsup",
     "clean": "node --eval \"import('node:fs').then(({ rmSync }) => rmSync('dist', { recursive: true, force: true }))\"",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -31,7 +30,8 @@
     "format": "dprint fmt",
     "lint": "DEBUG=eslint:eslint* TIMING=1 eslint . --cache --concurrency=auto",
     "lint:fix": "DEBUG=eslint:eslint* TIMING=1 eslint . --fix --cache --quiet --concurrency=auto",
-    "release": "release-it"
+    "release": "release-it",
+    "prepare": "pnpm build"
   },
   "publishConfig": {
     "access": "public"
