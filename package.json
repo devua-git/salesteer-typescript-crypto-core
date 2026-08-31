@@ -1,5 +1,6 @@
 {
   "name": "@salesteer/crypto-core",
+  "version": "0.1.3",
   "description": "Browser-native cryptographic primitives and vault key management for Salesteer applications.",
   "type": "module",
   "license": "MIT",
@@ -29,7 +30,6 @@
     "format": "dprint fmt",
     "lint": "DEBUG=eslint:eslint* TIMING=1 eslint . --cache --concurrency=auto",
     "lint:fix": "DEBUG=eslint:eslint* TIMING=1 eslint . --fix --cache --quiet --concurrency=auto",
-    "release": "release-it",
     "prepare": "pnpm build"
   },
   "publishConfig": {
@@ -46,7 +46,6 @@
     "@vitest/coverage-v8": "^4.1.11",
     "dprint": "^0.57.0",
     "eslint": "^10.9.1",
-    "release-it": "^21.0.2",
     "tsup": "^8.5.1",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript-eslint": "^8.68.0",
