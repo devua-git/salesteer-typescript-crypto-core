@@ -1,4 +1,4 @@
-export type ArrayBufferInput = ArrayBufferLike | ArrayBufferView
+export type ArrayBufferInput = ArrayBuffer | ArrayBufferView
 
 export function toUint8Array(input: Uint8Array | ArrayBufferInput | string): Uint8Array {
   if (typeof input === 'string') {
