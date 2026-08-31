@@ -1,0 +1,87 @@
+{
+  // Editor
+  "editor.formatOnSave": true,
+  "editor.pasteAs.enabled": false,
+  "editor.pasteAs.showPasteSelector": "never",
+  "editor.inlineSuggest.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "never",
+    "source.fixAll.ts": "never",
+    "source.fixAll.eslint": "explicit",
+    "source.addMissingImports.ts": "never",
+    "source.organizeImports": "never",
+    "source.organizeImports.ts": "never",
+    "source.removeUnused.ts": "never",
+    "source.removeUnusedImports": "never",
+    "source.sortImports": "never"
+  },
+
+  // Eslint
+  "eslint.format.enable": true,
+  "eslint.codeActionsOnSave.mode": "problems",
+  "eslint.codeActionsOnSave.rules": null,
+  "eslint.lintTask.enable": false,
+
+  // TailwindCSS
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "cva\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ],
+    [
+      "cx\\(([^)]*)\\)",
+      "(?:'|\"|`)([^']*)(?:'|\"|`)"
+    ],
+    [
+      "cn\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*)[\"'`]"
+    ],
+    "class:\\s*?[\"'`]([^\"'`]*).*?,"
+  ],
+  "scss.lint.unknownAtRules": "ignore",
+  "css.lint.unknownAtRules": "ignore",
+
+  // Typescript
+  "js/ts.suggest.enabled": true,
+  "js/ts.inlayHints.propertyDeclarationTypes.enabled": true,
+  "js/ts.inlayHints.enumMemberValues.enabled": true,
+  "js/ts.inlayHints.functionLikeReturnTypes.enabled": false,
+  "js/ts.inlayHints.parameterNames.enabled": "all",
+  "js/ts.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,
+  "js/ts.inlayHints.parameterTypes.enabled": true,
+  "js/ts.inlayHints.variableTypes.enabled": false,
+  "js/ts.inlayHints.variableTypes.suppressWhenTypeMatchesName": true,
+  "js/ts.updateImportsOnFileMove.enabled": "never",
+
+  // Vue
+  "vue.inlayHints.inlineHandlerLeading": true,
+  "vue.inlayHints.missingProps": true,
+  "vue.inlayHints.optionsWrapper": true,
+  "vue.autoInsert.bracketSpacing": false,
+  "vue.codeActions.enabled": false,
+  "vue.autoInsert.dotValue": false,
+
+  // Formatters
+  "[vue]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "dprint.path": "./node_modules/dprint/dprint"
+}

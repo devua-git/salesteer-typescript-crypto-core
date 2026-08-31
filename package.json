@@ -1,0 +1,54 @@
+{
+  "name": "@salesteer/crypto-core",
+  "version": "0.1.0",
+  "description": "Browser-native cryptographic primitives and vault key management for Salesteer applications.",
+  "type": "module",
+  "license": "MIT",
+  "packageManager": "pnpm@11.24.0",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "pnpm typecheck && tsup",
+    "clean": "node --eval \"import('node:fs').then(({ rmSync }) => rmSync('dist', { recursive: true, force: true }))\"",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "verify": "pnpm typecheck && pnpm test && pnpm build",
+    "format": "dprint fmt",
+    "lint": "DEBUG=eslint:eslint* TIMING=1 eslint . --cache --concurrency=auto",
+    "lint:fix": "DEBUG=eslint:eslint* TIMING=1 eslint . --fix --cache --quiet --concurrency=auto"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@noble/hashes": "^2.4.0",
+    "cbor2": "^2.3.0",
+    "superjson": "^2.2.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "@vitest/coverage-v8": "^4.1.11",
+    "dprint": "^0.57.0",
+    "eslint": "^10.9.1",
+    "tsup": "^8.5.1",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "typescript-eslint": "^8.68.0",
+    "vitest": "^4.1.11"
+  }
+}
