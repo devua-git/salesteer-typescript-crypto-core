@@ -1,6 +1,5 @@
 {
   "name": "@salesteer/crypto-core",
-  "version": "0.1.0",
   "description": "Browser-native cryptographic primitives and vault key management for Salesteer applications.",
   "type": "module",
   "license": "MIT",

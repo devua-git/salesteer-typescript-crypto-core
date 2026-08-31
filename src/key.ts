@@ -13,7 +13,7 @@ export type VaultKeyEncodedPayload = {
   format: 'raw' | 'spki' | 'pkcs8'
   algorithm: KeyAlgorithm
   usages: KeyUsage[]
-  key: Uint8Array
+  key: Uint8Array<ArrayBuffer>
 }
 
 export class VaultKey {
@@ -23,7 +23,7 @@ export class VaultKey {
     }
   }
 
-  async getKeyBuffer(): Promise<Uint8Array> {
+  async getKeyBuffer(): Promise<Uint8Array<ArrayBuffer>> {
     const keyBuffer = await globalThis.crypto.subtle.exportKey(
       keyTypeToFormatMap[this.key.type],
       this.key,
@@ -36,7 +36,7 @@ export class VaultKey {
     return encodeBase64(await this.getKeyBuffer())
   }
 
-  async getPayloadBuffer(): Promise<Uint8Array> {
+  async getPayloadBuffer(): Promise<Uint8Array<ArrayBuffer>> {
     const encodedPayload: VaultKeyEncodedPayload = {
       kid: this.kid,
       format: keyTypeToFormatMap[this.key.type],
@@ -48,7 +48,7 @@ export class VaultKey {
     return new TextEncoder().encode(stringify(encodedPayload))
   }
 
-  static async fromPayloadBuffer(payload: Uint8Array): Promise<VaultKey> {
+  static async fromPayloadBuffer(payload: Uint8Array<ArrayBuffer>): Promise<VaultKey> {
     const encodedPayload = parse<VaultKeyEncodedPayload>(
       new TextDecoder().decode(payload),
     )

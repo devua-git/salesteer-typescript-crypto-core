@@ -21,7 +21,7 @@ export const HKDFKeyLength = {
 export type HKDFKeyLength = (typeof HKDFKeyLength)[keyof typeof HKDFKeyLength]
 
 export interface VaultCryptoAlgorithmService {
-  SHA(params: { message: CryptoAlgorithmInput; hash: SHAAlgorithm }): Uint8Array
+  SHA(params: { message: CryptoAlgorithmInput; hash: SHAAlgorithm }): Uint8Array<ArrayBuffer>
   PBKDF2(params: {
     password: CryptoAlgorithmInput
     salt: CryptoAlgorithmInput
@@ -39,7 +39,7 @@ export interface VaultCryptoAlgorithmService {
     key: VaultKey
     message: CryptoAlgorithmInput
     hash: SHAAlgorithm
-  }): Promise<Uint8Array>
+  }): Promise<Uint8Array<ArrayBuffer>>
 }
 
 class DefaultVaultCryptoAlgorithmService implements VaultCryptoAlgorithmService {
@@ -49,7 +49,7 @@ class DefaultVaultCryptoAlgorithmService implements VaultCryptoAlgorithmService 
     [SHAAlgorithm.SHA512]: nobleSha512,
   }
 
-  SHA(params: { message: CryptoAlgorithmInput; hash: SHAAlgorithm }): Uint8Array {
+  SHA(params: { message: CryptoAlgorithmInput; hash: SHAAlgorithm }): Uint8Array<ArrayBuffer> {
     return this.hashAlgorithmMap[params.hash](toUint8Array(params.message))
   }
 
@@ -106,7 +106,7 @@ class DefaultVaultCryptoAlgorithmService implements VaultCryptoAlgorithmService 
     key: VaultKey
     message: CryptoAlgorithmInput
     hash: SHAAlgorithm
-  }): Promise<Uint8Array> {
+  }): Promise<Uint8Array<ArrayBuffer>> {
     return nobleHmac(
       this.hashAlgorithmMap[params.hash],
       await params.key.getKeyBuffer(),

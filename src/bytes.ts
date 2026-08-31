@@ -1,6 +1,6 @@
 export type ArrayBufferInput = ArrayBuffer | ArrayBufferView
 
-export function toUint8Array(input: Uint8Array | ArrayBufferInput | string): Uint8Array {
+export function toUint8Array(input: Uint8Array<ArrayBuffer> | ArrayBufferInput | string): Uint8Array<ArrayBuffer> {
   if (typeof input === 'string') {
     return new TextEncoder().encode(input)
   }
@@ -16,7 +16,7 @@ export function toArrayBuffer(input: ArrayBufferInput): ArrayBuffer {
   return toUint8Array(input).buffer as ArrayBuffer
 }
 
-export const concatBuffers = (...inputs: readonly ArrayBufferInput[]): Uint8Array => {
+export const concatBuffers = (...inputs: readonly ArrayBufferInput[]): Uint8Array<ArrayBuffer> => {
   const byteArrays = inputs.map(toUint8Array)
   const totalLength = byteArrays.reduce((length, bytes) => length + bytes.byteLength, 0)
   const result = new Uint8Array(totalLength)

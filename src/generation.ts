@@ -3,7 +3,7 @@ import { randomUUID } from './random'
 
 export interface VaultCryptoGenerationService {
   UUID(): string
-  generateIv(): Uint8Array
+  generateIv(): Uint8Array<ArrayBuffer>
   generateSymmetricKey(): Promise<VaultKey>
   generateKeyPair(): Promise<{ publicKey: VaultKey; privateKey: VaultKey }>
 }
@@ -13,7 +13,7 @@ class DefaultVaultCryptoGenerationService implements VaultCryptoGenerationServic
     return randomUUID()
   }
 
-  generateIv(): Uint8Array {
+  generateIv(): Uint8Array<ArrayBuffer> {
     return globalThis.crypto.getRandomValues(new Uint8Array(12))
   }
 

@@ -6,17 +6,17 @@ import { VaultKey } from './key'
 
 type AlgorithmParams = {
   name: string
-  iv?: Uint8Array
+  iv?: Uint8Array<ArrayBuffer>
 }
 
 type VaultEncryptedPayload = {
   recipients: {
     kid: string
-    encryptedCEK: Uint8Array
+    encryptedCEK: Uint8Array<ArrayBuffer>
     algorithm: AlgorithmParams
   }[]
   algorithm: AlgorithmParams
-  ciphertext: Uint8Array
+  ciphertext: Uint8Array<ArrayBuffer>
 }
 
 type RecipientAAD = {
@@ -25,8 +25,8 @@ type RecipientAAD = {
 }
 
 export interface VaultCryptoService {
-  encrypt(payload: Uint8Array, key: VaultKey): Promise<string>
-  decrypt(payload: string, key: VaultKey): Promise<Uint8Array>
+  encrypt(payload: Uint8Array<ArrayBuffer>, key: VaultKey): Promise<string>
+  decrypt(payload: string, key: VaultKey): Promise<Uint8Array<ArrayBuffer>>
   addRecipientKey(payload: string, key: VaultKey, recipientKey: VaultKey): Promise<string>
 }
 
@@ -89,7 +89,7 @@ class DefaultVaultCryptoService implements VaultCryptoService {
     }
   }
 
-  private makePayloadAlgorithmParams(payloadIv: Uint8Array): AesGcmParams {
+  private makePayloadAlgorithmParams(payloadIv: Uint8Array<ArrayBuffer>): AesGcmParams {
     return {
       name: 'AES-GCM',
       iv: toArrayBuffer(payloadIv),
@@ -103,10 +103,10 @@ class DefaultVaultCryptoService implements VaultCryptoService {
   }
 
   private async encryptPayload(
-    payload: Uint8Array,
-    payloadIv: Uint8Array,
+    payload: Uint8Array<ArrayBuffer>,
+    payloadIv: Uint8Array<ArrayBuffer>,
     contentEncryptionKey: VaultKey,
-  ): Promise<Uint8Array> {
+  ): Promise<Uint8Array<ArrayBuffer>> {
     const encryptedPayload = await globalThis.crypto.subtle.encrypt(
       this.makePayloadAlgorithmParams(payloadIv),
       contentEncryptionKey.key,
@@ -116,7 +116,7 @@ class DefaultVaultCryptoService implements VaultCryptoService {
     return new Uint8Array(encryptedPayload)
   }
 
-  async encrypt(payload: Uint8Array, recipientKey: VaultKey): Promise<string> {
+  async encrypt(payload: Uint8Array<ArrayBuffer>, recipientKey: VaultKey): Promise<string> {
     const contentEncryptionKey = await VaultCryptoGenerationService.generateSymmetricKey()
     const recipientAAD = this.makeRecipientAAD(recipientKey)
     const recipient = await this.makeEncryptedRecipient(
@@ -165,7 +165,7 @@ class DefaultVaultCryptoService implements VaultCryptoService {
   private async decryptPayload(
     payload: VaultEncryptedPayload,
     contentEncryptionKey: VaultKey,
-  ): Promise<Uint8Array> {
+  ): Promise<Uint8Array<ArrayBuffer>> {
     const payloadIv = payload.algorithm.iv
     if (payloadIv === undefined) {
       throw new Error('Missing payload IV')
@@ -180,7 +180,7 @@ class DefaultVaultCryptoService implements VaultCryptoService {
     return new Uint8Array(decryptedPayload)
   }
 
-  async decrypt(payload: string, key: VaultKey): Promise<Uint8Array> {
+  async decrypt(payload: string, key: VaultKey): Promise<Uint8Array<ArrayBuffer>> {
     const decodedPayload = this.decodePayload(payload)
     const recipient = decodedPayload.recipients.find(({ kid }) => kid === key.kid)
 

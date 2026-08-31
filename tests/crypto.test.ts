@@ -7,11 +7,11 @@ const message = new TextEncoder().encode('Salesteer vault payload')
 type TestEncryptedPayload = {
   recipients: {
     kid: string
-    encryptedCEK: Uint8Array
-    algorithm: { name: string; iv?: Uint8Array }
+    encryptedCEK: Uint8Array<ArrayBuffer>
+    algorithm: { name: string; iv?: Uint8Array<ArrayBuffer> }
   }[]
-  algorithm: { name: string; iv?: Uint8Array }
-  ciphertext: Uint8Array
+  algorithm: { name: string; iv?: Uint8Array<ArrayBuffer> }
+  ciphertext: Uint8Array<ArrayBuffer>
 }
 
 const mutateEncryptedPayload = (

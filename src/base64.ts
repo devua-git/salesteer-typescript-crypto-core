@@ -31,7 +31,7 @@ export const encodeBase64 = (input: ArrayBufferInput): string => {
   return btoa(binary)
 }
 
-export const decodeBase64 = (value: string): Uint8Array => {
+export const decodeBase64 = (value: string): Uint8Array<ArrayBuffer> => {
   const binary = atob(validateBase64(value, base64Pattern))
   const bytes = new Uint8Array(binary.length)
 
@@ -46,7 +46,7 @@ export const encodeBase64Url = (input: ArrayBufferInput): string => {
   return encodeBase64(input).replaceAll('+', '-').replaceAll('/', '_').replace(/=+$/, '')
 }
 
-export const decodeBase64Url = (value: string): Uint8Array => {
+export const decodeBase64Url = (value: string): Uint8Array<ArrayBuffer> => {
   const base64 = validateBase64(value, base64UrlPattern)
     .replaceAll('-', '+')
     .replaceAll('_', '/')
