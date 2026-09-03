@@ -4,7 +4,7 @@
   "description": "Browser-native cryptographic primitives for Salesteer applications.",
   "type": "module",
   "license": "MIT",
-  "packageManager": "pnpm@11.24.0",
+  "packageManager": "pnpm@11.25.0",
   "sideEffects": false,
   "files": [
     "dist",
@@ -37,12 +37,15 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@noble/hashes": "^2.4.0",
-    "cbor2": "^2.3.0",
+  "peerDependencies": {
     "superjson": "^2.2.6"
   },
+  "dependencies": {
+    "@noble/hashes": "^2.4.0",
+    "cbor2": "^2.3.0"
+  },
   "devDependencies": {
+    "superjson": "^2.2.6",
     "@eslint/js": "^10.0.1",
     "@typescript/native": "npm:typescript@^7.0.2",
     "@vitest/coverage-v8": "^4.1.11",
@@ -50,7 +53,7 @@
     "eslint": "^10.9.1",
     "tsup": "^8.5.1",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "typescript-eslint": "^8.68.0",
+    "typescript-eslint": "^8.69.0",
     "vitest": "^4.1.11"
   }
 }
