@@ -1,6 +1,6 @@
 {
   "name": "@salesteer/crypto-core",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Browser-native cryptographic primitives for Salesteer applications.",
   "type": "module",
   "license": "MIT",
@@ -45,12 +45,12 @@
     "cbor2": "^2.3.0"
   },
   "devDependencies": {
-    "superjson": "^2.2.6",
     "@eslint/js": "^10.0.1",
     "@typescript/native": "npm:typescript@^7.0.2",
     "@vitest/coverage-v8": "^4.1.11",
     "dprint": "^0.57.0",
     "eslint": "^10.9.1",
+    "superjson": "^2.2.6",
     "tsup": "^8.5.1",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript-eslint": "^8.69.0",
